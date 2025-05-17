@@ -11,7 +11,6 @@ const capabilities = [
                 platform: 'ios'
             },
              "appium:app" : "path/to/your/app.app",
-             "appium:derivedDataPath": "/Users/alinaenea/Library/Developer/Xcode/DerivedData",
             "appium:usePrebuiltWDA": true, 
             "appium:showXcodeLog": true, 
           }, 
