@@ -2,7 +2,6 @@
 const path = require('path');
 const argv = require('yargs').argv;
 const testCapabilities = require('./utils/capabilities');
-const commandTimings = {};
 
 
 exports.config = {
@@ -30,21 +29,10 @@ exports.config = {
         timeout: 60000
     },
  
-    reporters: ['spec'],
- 
+     reporters: [
+        'spec',
+        [path.resolve(__dirname, './utils/customReporter.js'), {}] // Custom reporter for performance logs
+    ],
+
     waitforTimeout: 15000,
-
-    // 👉 Add these hooks to track Events API:
-    //
-beforeCommand: function (commandName, args) {
-    const start = Date.now();
-    commandTimings[commandName] = { start, args };
-    console.log(`[COMMAND] ${commandName} → ${JSON.stringify(args)}`);
-},
-
-afterCommand: function (commandName, args, result, error) {
-    const end = Date.now();
-    const duration = end - commandTimings[commandName].start;
-    console.log(`[RESULT] ${commandName} ← Duration: ${duration} ms`);
-}
 };
